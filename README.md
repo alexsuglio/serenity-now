@@ -1,6 +1,6 @@
-# 🧘 Serenity Now — GitHub Enterprise AI Credits Management
+# 🧘 Project Serenity Now — GitHub Enterprise AI Credits Management
 
-> *"SERENITY NOW!"* — Frank Costanza, when the AI credit alerts fire
+> *"SERENITY NOW!"* — Frank Costanza, when the AI credit alerts fire at once
 
 A functional mockup of a GitHub Enterprise capability that enables admins and budget owners to **purchase, distribute, and manage AI credits** across dev communities with full budget controls, policies, and analytics.
 
