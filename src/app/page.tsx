@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -21,6 +22,12 @@ import Link from 'next/link';
 const COLORS = ['#7c3aed', '#2563eb', '#059669', '#d97706', '#dc2626', '#8b5cf6'];
 
 export default function DashboardPage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const totalCredits = creditPools.reduce((s, p) => s + p.totalCredits, 0);
   const usedCredits = creditPools.reduce((s, p) => s + p.usedCredits, 0);
   const remainingCredits = totalCredits - usedCredits;
@@ -32,14 +39,14 @@ export default function DashboardPage() {
   const totalBudget = costCenters.reduce((s, cc) => s + cc.monthlyBudget, 0);
   const totalSpend = costCenters.reduce((s, cc) => s + cc.currentSpend, 0);
 
-  const dailyTotals = getDailyTotals(30);
-  const modelBreakdown = getConsumptionByModel(30);
-  const topConsumers = getTopConsumers(30);
+  const dailyTotals = mounted ? getDailyTotals(30) : [];
+  const modelBreakdown = mounted ? getConsumptionByModel(30) : [];
+  const topConsumers = mounted ? getTopConsumers(30) : [];
 
   const activeAlerts = allAlerts.filter(a => !a.acknowledged);
   const burnRate = dailyTotals.length > 0 ? dailyTotals[dailyTotals.length - 1].total : 0;
-  const avgBurnRate = dailyTotals.reduce((s, d) => s + d.total, 0) / dailyTotals.length;
-  const daysRemaining = Math.round(remainingCredits / avgBurnRate);
+  const avgBurnRate = dailyTotals.length > 0 ? dailyTotals.reduce((s, d) => s + d.total, 0) / dailyTotals.length : 0;
+  const daysRemaining = avgBurnRate > 0 ? Math.round(remainingCredits / avgBurnRate) : 0;
 
   return (
     <div className="space-y-6">
@@ -280,10 +287,10 @@ export default function DashboardPage() {
           <div className="space-y-3">
             {[
               { icon: <AlertTriangle className="h-4 w-4 text-red-500" />, text: 'Enterprise pool projected to exhaust May 28', time: 'Today' },
-              { icon: <AlertTriangle className="h-4 w-4 text-amber-500" />, text: 'Marcus Johnson requested 50K supplemental credits — pending approval', time: '2 days ago' },
-              { icon: <XCircle className="h-4 w-4 text-red-500" />, text: 'Tyler Nguyen unauthorized purchase blocked by policy', time: '4 days ago' },
-              { icon: <CheckCircle2 className="h-4 w-4 text-green-500" />, text: 'Auto top-up: 20K credits for Data Science ($2,000)', time: 'Apr 28' },
-              { icon: <Clock className="h-4 w-4 text-violet-500" />, text: 'SRE supplemental allocation increased to 12K (post-incident)', time: 'May 5' },
+              { icon: <AlertTriangle className="h-4 w-4 text-amber-500" />, text: 'Elaine Benes requested 50K supplemental credits — pending approval', time: '2 days ago' },
+              { icon: <XCircle className="h-4 w-4 text-red-500" />, text: 'Cedric unauthorized purchase blocked by policy', time: '4 days ago' },
+              { icon: <CheckCircle2 className="h-4 w-4 text-green-500" />, text: 'Auto top-up: 20K credits for Human Fund Data ($2,000)', time: 'Apr 28' },
+              { icon: <Clock className="h-4 w-4 text-violet-500" />, text: 'Marine Ops supplemental allocation increased to 12K (post-incident)', time: 'May 5' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 rounded-md p-2 hover:bg-gray-50 dark:hover:bg-gray-900/50">
                 {item.icon}

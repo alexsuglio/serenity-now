@@ -3,6 +3,7 @@
 import { Bell, Search, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { alerts } from '@/data/mock-data';
 
 export function Header() {
@@ -24,6 +25,7 @@ export function Header() {
 
       {/* Right side */}
       <div className="flex items-center gap-4">
+        <ThemeToggle />
         <Button variant="ghost" size="sm" className="relative">
           <Bell className="h-4 w-4" />
           {unacknowledgedAlerts > 0 && (
@@ -37,7 +39,7 @@ export function Header() {
             <User className="h-4 w-4" />
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Pat Morrison</p>
+            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Art Vandelay</p>
             <p className="text-xs text-gray-500">Enterprise Admin</p>
           </div>
         </div>

@@ -34,7 +34,7 @@ export default function AnalyticsPage() {
       .reduce((s, r) => s + r.creditsUsed, 0);
     const costPerCredit = 0.10;
     return {
-      org: org.name.replace('ACME ', ''),
+      org: org.name,
       totalCredits: orgConsumption,
       totalCost: orgConsumption * costPerCredit,
       members: org.memberCount,
@@ -158,7 +158,7 @@ export default function AnalyticsPage() {
                   <Tooltip formatter={(value) => formatCredits(Number(value))} />
                   <Legend />
                   {organizations.map((org, i) => (
-                    <Area key={org.id} type="monotone" dataKey={org.slug} stackId="1" stroke={COLORS[i]} fill={COLORS[i]} fillOpacity={0.6} name={org.name.replace('ACME ', '')} />
+                    <Area key={org.id} type="monotone" dataKey={org.slug} stackId="1" stroke={COLORS[i]} fill={COLORS[i]} fillOpacity={0.6} name={org.name} />
                   ))}
                 </AreaChart>
               </ResponsiveContainer>
