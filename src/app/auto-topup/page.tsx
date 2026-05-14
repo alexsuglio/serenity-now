@@ -22,7 +22,7 @@ import {
 export default function AutoTopUpPage() {
   const [selectedRule, setSelectedRule] = useState<string | null>(null);
 
-  // Generate projected consumption data for the data science pool
+  // Generate projected consumption data for the Human Fund pool
   const projectionData = Array.from({ length: 30 }, (_, i) => {
     const date = new Date();
     date.setDate(date.getDate() + i);
@@ -97,7 +97,7 @@ export default function AutoTopUpPage() {
       {/* Consumption Forecast */}
       <Card>
         <CardHeader>
-          <CardTitle>Consumption Forecast — Data Science Pool</CardTitle>
+          <CardTitle>Consumption Forecast — Human Fund Pool</CardTitle>
           <CardDescription>30-day projection based on current trends. Auto top-up triggers when pool drops below 20%.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -232,9 +232,9 @@ export default function AutoTopUpPage() {
         <CardContent>
           <div className="space-y-3">
             {[
-              { date: 'Apr 28, 2026', pool: 'Data Science Supplemental', amount: 20000, cost: 2000, trigger: 'Pool at 15% remaining', status: 'completed' },
+              { date: 'Apr 28, 2026', pool: 'Human Fund Supplemental', amount: 20000, cost: 2000, trigger: 'Pool at 15% remaining', status: 'completed' },
               { date: 'Apr 15, 2026', pool: 'Platform Engineering Supplemental', amount: 15000, cost: 1500, trigger: 'Projected exhaustion in 5 days', status: 'pending_approval' },
-              { date: 'Mar 25, 2026', pool: 'Data Science Supplemental', amount: 20000, cost: 2000, trigger: 'Pool at 18% remaining', status: 'completed' },
+              { date: 'Mar 25, 2026', pool: 'Human Fund Supplemental', amount: 20000, cost: 2000, trigger: 'Pool at 18% remaining', status: 'completed' },
             ].map((entry, i) => (
               <div key={i} className="flex items-center justify-between rounded-md border border-gray-200 p-3 dark:border-gray-800">
                 <div className="flex items-center gap-3">

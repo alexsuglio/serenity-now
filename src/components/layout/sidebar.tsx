@@ -48,7 +48,7 @@ export function Sidebar() {
         <div className="flex items-center gap-2 rounded-md bg-white px-3 py-2 shadow-sm ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800">
           <Building2 className="h-4 w-4 text-gray-400" />
           <div className="flex-1 min-w-0">
-            <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">ACME Corporation</p>
+            <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">Vandelay Industries</p>
             <p className="text-xs text-gray-500">2,500 seats · Enterprise Cloud</p>
           </div>
         </div>
