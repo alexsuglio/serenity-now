@@ -1,0 +1,42 @@
+name: Deploy To GitHub Landing Page
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        env:
+          NEXT_PUBLIC_BASE_PATH: /GitHub-Landing-Page
+          NEXT_TELEMETRY_DISABLED: 1
+        run: npm run build
+
+      - name: Disable Jekyll processing
+        run: touch out/.nojekyll
+
+      - name: Deploy to GitHub-Landing-Page
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+          external_repository: alexsuglio/GitHub-Landing-Page
+          publish_branch: gh-pages
+          publish_dir: ./out
+          destination_dir: .
+          force_orphan: true
